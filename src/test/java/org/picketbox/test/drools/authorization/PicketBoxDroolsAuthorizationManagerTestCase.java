@@ -25,12 +25,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 import org.picketbox.PicketBoxPrincipal;
 import org.picketbox.authorization.Resource;
+import org.picketbox.core.PicketBoxSubject;
 import org.picketbox.drools.authorization.PicketBoxDroolsAuthorizationManager;
 
 /**
@@ -46,7 +45,9 @@ public class PicketBoxDroolsAuthorizationManagerTestCase {
         am.start();
         
         Principal principal = new PicketBoxPrincipal("anil");
-        Map<String,Object> contextData = new HashMap<String,Object>();
+        
+        PicketBoxSubject subject = new PicketBoxSubject();
+        subject.setUser(principal);
         
         Resource resource = new Resource(){
             private static final long serialVersionUID = 1L;
@@ -62,11 +63,13 @@ public class PicketBoxDroolsAuthorizationManagerTestCase {
                 aut = authorize;
             }   
         };
-        assertTrue(am.authorize(resource, principal, contextData));
+        assertTrue(am.authorize(resource, subject));
         
         resource.setAuthorized(false);
         
         principal = new PicketBoxPrincipal("Bad Man");
-        assertFalse(am.authorize(resource, principal, contextData));
+        subject = new PicketBoxSubject();
+        subject.setUser(principal);
+        assertFalse(am.authorize(resource, subject));
     }
 }

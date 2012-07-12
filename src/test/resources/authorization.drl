@@ -16,3 +16,15 @@ no-loop
        setAuthorized(true)
     };
 end
+
+rule "Authorize if principal == Aladdin"
+dialect "java"
+no-loop
+ when
+  $principal : Principal( name == "Aladdin" ) // condition
+  $resource : Resource()
+ then
+    modify ($resource){
+       setAuthorized(true)
+    };
+end
