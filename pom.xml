@@ -20,6 +20,10 @@
       <name>JBoss Inc.</name>
       <url>http://www.jboss.org</url>
    </organization>
+   
+	<properties>
+		<picketbox.core.version>5.0.0-SNAPSHOT</picketbox.core.version>
+	</properties>
    <build>
      <plugins>
        <plugin>
@@ -88,6 +92,15 @@
         <version>5.4.0.Final</version>
         <scope>provided</scope>
       </dependency>
+      
+      <!-- Test dependencies -->
+      <dependency>
+		<groupId>org.picketbox</groupId>
+		<artifactId>picketbox-core</artifactId>
+	    <version>${picketbox.core.version}</version>
+		<type>test-jar</type>
+		<scope>test</scope>
+	  </dependency>
       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>

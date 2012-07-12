@@ -22,8 +22,6 @@
 package org.picketbox.drools.authorization;
 
 import java.io.InputStream;
-import java.security.Principal;
-import java.util.Map;
 
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
@@ -34,6 +32,7 @@ import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.picketbox.authorization.AuthorizationManager;
 import org.picketbox.authorization.Resource;
+import org.picketbox.core.PicketBoxSubject;
 import org.picketbox.drools.PicketBoxDroolsMessages;
 
 /**
@@ -62,16 +61,16 @@ public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager
     }
 
     @Override
-    public boolean authorize(Resource resource, Principal principal, Map<String, Object> contextData) {
+    public boolean authorize(Resource resource, PicketBoxSubject subject) {
         if(started == false){
             throw PicketBoxDroolsMessages.MESSAGES.authorizationManagerNotStarted(getClass().getName());
         }
         StatefulKnowledgeSession session = knowledgeBase.newStatefulKnowledgeSession();
         
-        //Inser the facts
+        //Insert the facts
         session.insert(resource);
-        session.insert(principal);
-        session.insert(contextData);
+        session.insert(subject.getUser());
+        session.insert(subject);
         
         // Fire the rules.  At the end, the resource.isAuthorized() call can tell us if the resource is authorized
         session.fireAllRules();
@@ -80,7 +79,7 @@ public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager
     }
 
     @Override
-    public Entitlement[] entitlements(Resource resource, Principal principal, Map<String, Object> contextData) {
+    public Entitlement[] entitlements(Resource resource, PicketBoxSubject subject) {
         throw PicketBoxDroolsMessages.MESSAGES.entitlementsNotImplemented();
     }
     
