@@ -84,13 +84,11 @@
         <groupId>org.drools</groupId>
         <artifactId>drools-core</artifactId>
         <version>5.4.0.Final</version>
-        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.drools</groupId>
         <artifactId>drools-compiler</artifactId>
         <version>5.4.0.Final</version>
-        <scope>provided</scope>
       </dependency>
       
       <!-- Test dependencies -->
