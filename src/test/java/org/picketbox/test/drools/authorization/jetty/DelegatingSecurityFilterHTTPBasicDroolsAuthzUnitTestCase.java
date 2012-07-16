@@ -37,12 +37,12 @@ import org.junit.Test;
 import org.mortbay.jetty.servlet.Context;
 import org.mortbay.jetty.servlet.FilterHolder;
 import org.mortbay.jetty.webapp.WebAppContext;
-import org.picketbox.authentication.PicketBoxConstants;
-import org.picketbox.authentication.http.HTTPBasicAuthentication;
-import org.picketbox.authentication.http.impl.HTTPBasicAuthenticationSchemeLoader;
-import org.picketbox.authentication.impl.SimpleCredentialAuthenticationManager;
+import org.picketbox.core.authentication.PicketBoxConstants;
+import org.picketbox.core.authentication.http.HTTPBasicAuthentication;
+import org.picketbox.core.authentication.http.impl.HTTPBasicAuthenticationSchemeLoader;
+import org.picketbox.core.authentication.impl.SimpleCredentialAuthenticationManager;
 import org.picketbox.drools.authorization.PicketBoxDroolsAuthorizationManager;
-import org.picketbox.http.filters.DelegatingSecurityFilter;
+import org.picketbox.core.http.filters.DelegatingSecurityFilter;
 import org.picketbox.test.http.jetty.EmbeddedWebServerBase;
 
 /**
