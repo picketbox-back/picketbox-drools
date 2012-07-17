@@ -41,3 +41,6 @@ hs_err_pid*.log
 PutObjectStoreDirHere
 # ignore mvn-rpmbuild repo
 /.m2
+#ignore opends lock files
+*.lock
+.checkstyle

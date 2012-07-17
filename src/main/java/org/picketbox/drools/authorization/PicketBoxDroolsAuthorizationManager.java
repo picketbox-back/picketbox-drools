@@ -37,21 +37,23 @@ import org.picketbox.drools.PicketBoxDroolsMessages;
 
 /**
  * An implementation of {@link AuthorizationManager} using Drools
+ *
  * @author anil saldhana
  * @since Jul 12, 2012
  */
 public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager {
-    
+
     protected boolean stopped = false, started = false;
-    
+
     protected String droolsFile = "authorization.drl";
     private KnowledgeBuilder builder;
-    
+
     protected KnowledgeBase knowledgeBase = null;
-    
-    public PicketBoxDroolsAuthorizationManager(){
-         this.builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+
+    public PicketBoxDroolsAuthorizationManager() {
+        this.builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
     }
+
     public String getDroolsFile() {
         return droolsFile;
     }
@@ -62,22 +64,22 @@ public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager
 
     @Override
     public boolean authorize(Resource resource, PicketBoxSubject subject) {
-        if(started == false){
+        if (started == false) {
             throw PicketBoxDroolsMessages.MESSAGES.authorizationManagerNotStarted(getClass().getName());
         }
         StatefulKnowledgeSession session = knowledgeBase.newStatefulKnowledgeSession();
-        
-        //Insert the facts
+
+        // Insert the facts
         session.insert(resource);
         session.insert(subject.getUser());
         session.insert(subject);
-        
-        // Fire the rules.  At the end, the resource.isAuthorized() call can tell us if the resource is authorized
+
+        // Fire the rules. At the end, the resource.isAuthorized() call can tell us if the resource is authorized
         session.fireAllRules();
 
         // call dispose to release used resources
         session.dispose();
-        
+
         return resource.isAuthorized();
     }
 
@@ -85,33 +87,36 @@ public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager
     public Entitlement[] entitlements(Resource resource, PicketBoxSubject subject) {
         throw PicketBoxDroolsMessages.MESSAGES.entitlementsNotImplemented();
     }
-    
+
     @Override
     public boolean started() {
         return started;
     }
+
     @Override
     public void start() {
-        if(knowledgeBase == null){
+        if (knowledgeBase == null) {
             InputStream drl = getClass().getClassLoader().getResourceAsStream(droolsFile);
-            if(drl == null)
+            if (drl == null)
                 throw PicketBoxDroolsMessages.MESSAGES.drlNotAvailable(droolsFile);
-             
+
             builder.add(ResourceFactory.newInputStreamResource(drl), ResourceType.DRL);
             if (builder.hasErrors()) {
-                    throw new RuntimeException(builder.getErrors().toString());
+                throw new RuntimeException(builder.getErrors().toString());
             }
 
             knowledgeBase = KnowledgeBaseFactory.newKnowledgeBase();
-            //Add to Knowledge Base packages from the builder which are actually the rules from the drl file.  
-            knowledgeBase.addKnowledgePackages(builder.getKnowledgePackages());   
+            // Add to Knowledge Base packages from the builder which are actually the rules from the drl file.
+            knowledgeBase.addKnowledgePackages(builder.getKnowledgePackages());
         }
         this.started = true;
     }
+
     @Override
     public boolean stopped() {
         return stopped;
     }
+
     @Override
     public void stop() {
         knowledgeBase = null;
