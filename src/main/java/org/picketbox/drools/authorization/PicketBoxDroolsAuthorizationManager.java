@@ -30,9 +30,9 @@ import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.picketbox.core.PicketBoxSubject;
 import org.picketbox.core.authorization.AuthorizationManager;
 import org.picketbox.core.authorization.Resource;
-import org.picketbox.core.PicketBoxSubject;
 import org.picketbox.drools.PicketBoxDroolsMessages;
 
 /**
