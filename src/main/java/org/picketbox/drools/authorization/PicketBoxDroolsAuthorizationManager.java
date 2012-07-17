@@ -84,11 +84,6 @@ public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager
     }
 
     @Override
-    public Entitlement[] entitlements(Resource resource, PicketBoxSubject subject) {
-        throw PicketBoxDroolsMessages.MESSAGES.entitlementsNotImplemented();
-    }
-
-    @Override
     public boolean started() {
         return started;
     }
