@@ -35,14 +35,12 @@ import org.jboss.logging.Messages;
 public interface PicketBoxDroolsMessages {
 
     PicketBoxDroolsMessages MESSAGES = Messages.getBundle(PicketBoxDroolsMessages.class);
-    
+
     @Message(id = 1, value = "Entitlements Not Implemented")
     RuntimeException entitlementsNotImplemented();
-    
 
     @Message(id = 2, value = "Drools File Not Available: %s")
     RuntimeException drlNotAvailable(String fileName);
-    
 
     @Message(id = 3, value = "Authorization Manager Not Started: %s")
     RuntimeException authorizationManagerNotStarted(String className);
