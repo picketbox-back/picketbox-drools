@@ -21,6 +21,8 @@
  */
 package org.picketbox.test.drools.authorization.jetty;
 
+
+
 import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
@@ -39,10 +41,9 @@ import org.mortbay.jetty.servlet.FilterHolder;
 import org.mortbay.jetty.webapp.WebAppContext;
 import org.picketbox.core.authentication.PicketBoxConstants;
 import org.picketbox.core.authentication.http.HTTPBasicAuthentication;
-import org.picketbox.core.authentication.http.impl.HTTPBasicAuthenticationSchemeLoader;
-import org.picketbox.core.authentication.impl.SimpleCredentialAuthenticationManager;
-import org.picketbox.drools.authorization.PicketBoxDroolsAuthorizationManager;
+import org.picketbox.core.authentication.manager.SimpleCredentialAuthenticationManager;
 import org.picketbox.core.http.filters.DelegatingSecurityFilter;
+import org.picketbox.drools.authorization.PicketBoxDroolsAuthorizationManager;
 import org.picketbox.test.http.jetty.EmbeddedWebServerBase;
 
 /**
@@ -84,7 +85,7 @@ public class DelegatingSecurityFilterHTTPBasicDroolsAuthzUnitTestCase extends Em
                 SimpleCredentialAuthenticationManager.class.getName());
         filterHolder.setInitParameter(PicketBoxConstants.AUTHZ_MGR, "Drools");
         filterHolder.setInitParameter(PicketBoxConstants.AUTH_SCHEME_LOADER,
-                HTTPBasicAuthenticationSchemeLoader.class.getName());
+                HTTPBasicAuthentication.class.getName());
         context.addFilter(filterHolder, "/", 1);
     }
 
