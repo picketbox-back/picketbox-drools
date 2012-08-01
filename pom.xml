@@ -39,6 +39,7 @@
    </organization>
    <properties>
       <picketbox.core.version>5.0.0-SNAPSHOT</picketbox.core.version>
+      <picketbox.http.version>5.0.0-SNAPSHOT</picketbox.http.version>
    </properties>
    <build>
       <plugins>
@@ -95,7 +96,13 @@
       <dependency>
          <groupId>org.picketbox</groupId>
          <artifactId>picketbox-core</artifactId>
-         <version>${project.version}</version>
+         <version>${picketbox.core.version}</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.picketbox</groupId>
+         <artifactId>picketbox-http</artifactId>
+         <version>${picketbox.http.version}</version>
          <scope>provided</scope>
       </dependency>
       <dependency>
@@ -111,8 +118,8 @@
       <!-- Test dependencies -->
       <dependency>
          <groupId>org.picketbox</groupId>
-         <artifactId>picketbox-core</artifactId>
-         <version>${picketbox.core.version}</version>
+         <artifactId>picketbox-http</artifactId>
+         <version>${picketbox.http.version}</version>
          <type>test-jar</type>
          <scope>test</scope>
       </dependency>
