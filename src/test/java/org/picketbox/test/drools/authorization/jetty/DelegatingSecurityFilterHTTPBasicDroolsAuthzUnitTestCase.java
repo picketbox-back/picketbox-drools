@@ -21,9 +21,8 @@
  */
 package org.picketbox.test.drools.authorization.jetty;
 
-
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
 
@@ -40,9 +39,9 @@ import org.mortbay.jetty.servlet.Context;
 import org.mortbay.jetty.servlet.FilterHolder;
 import org.mortbay.jetty.webapp.WebAppContext;
 import org.picketbox.core.authentication.PicketBoxConstants;
-import org.picketbox.core.authentication.http.HTTPBasicAuthentication;
+import org.picketbox.http.authentication.HTTPBasicAuthentication;
 import org.picketbox.core.authentication.manager.SimpleCredentialAuthenticationManager;
-import org.picketbox.core.http.filters.DelegatingSecurityFilter;
+import org.picketbox.http.filters.DelegatingSecurityFilter;
 import org.picketbox.drools.authorization.PicketBoxDroolsAuthorizationManager;
 import org.picketbox.test.http.jetty.EmbeddedWebServerBase;
 
@@ -70,6 +69,7 @@ public class DelegatingSecurityFilterHTTPBasicDroolsAuthzUnitTestCase extends Em
 
         // for localhost:port/admin/index.html and whatever else is in the webapp directory
         final URL warUrl = tcl.getResource(WEBAPPDIR);
+        assertNotNull(warUrl);
         final String warUrlString = warUrl.toExternalForm();
 
         Context context = new WebAppContext(warUrlString, CONTEXTPATH);
