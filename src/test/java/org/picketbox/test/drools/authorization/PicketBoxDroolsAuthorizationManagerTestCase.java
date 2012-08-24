@@ -28,6 +28,7 @@ import java.security.Principal;
 
 import org.junit.Test;
 import org.picketbox.core.PicketBoxPrincipal;
+import org.picketbox.core.PicketBoxSubject;
 import org.picketbox.core.authorization.Resource;
 import org.picketbox.core.PicketBoxSubject;
 import org.picketbox.drools.authorization.PicketBoxDroolsAuthorizationManager;
