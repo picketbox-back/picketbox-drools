@@ -74,7 +74,7 @@ public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager
         session.insert(subject.getUser());
         session.insert(subject);
 
-        // Fire the rules. At the end, the resource.isAuthorized() call can tell us if the resource is authorized
+        // Fire the rules. At the end, the resource.isAuthorized() call can tell us if the resource is authorized.
         session.fireAllRules();
 
         // call dispose to release used resources
