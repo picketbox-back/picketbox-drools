@@ -71,6 +71,6 @@ public class PicketBoxDroolsAuthorizationManagerTestCase {
         principal = new PicketBoxPrincipal("Bad Man");
         subject = new PicketBoxSubject();
         subject.setUser(principal);
-        assertTrue(am.authorize(resource, subject));
+        assertFalse(am.authorize(resource, subject));
     }
 }
