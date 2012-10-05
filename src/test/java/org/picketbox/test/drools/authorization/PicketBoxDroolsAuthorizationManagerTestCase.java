@@ -30,7 +30,6 @@ import org.junit.Test;
 import org.picketbox.core.PicketBoxPrincipal;
 import org.picketbox.core.PicketBoxSubject;
 import org.picketbox.core.authorization.Resource;
-import org.picketbox.core.PicketBoxSubject;
 import org.picketbox.drools.authorization.PicketBoxDroolsAuthorizationManager;
 
 /**
@@ -45,10 +44,14 @@ public class PicketBoxDroolsAuthorizationManagerTestCase {
         PicketBoxDroolsAuthorizationManager am = new PicketBoxDroolsAuthorizationManager();
         am.start();
         
-        Principal principal = new PicketBoxPrincipal("anil");
+        final Principal principal = new PicketBoxPrincipal("anil");
         
-        PicketBoxSubject subject = new PicketBoxSubject();
-        subject.setUser(principal);
+        PicketBoxSubject subject = new PicketBoxSubject() {
+            @Override
+            public Principal getPrincipal() {
+                return principal;
+            }
+        };
         
         Resource resource = new Resource(){
             private static final long serialVersionUID = 1L;
@@ -64,13 +67,19 @@ public class PicketBoxDroolsAuthorizationManagerTestCase {
                 aut = authorize;
             }   
         };
+        
         assertTrue(am.authorize(resource, subject));
         
         resource.setAuthorized(false);
         
-        principal = new PicketBoxPrincipal("Bad Man");
-        subject = new PicketBoxSubject();
-        subject.setUser(principal);
+        final Principal badPrincipal = new PicketBoxPrincipal("Bad Man");
+        
+        subject = new PicketBoxSubject() {
+            @Override
+            public Principal getPrincipal() {
+                return badPrincipal;
+            }
+        };
         assertFalse(am.authorize(resource, subject));
     }
 }
