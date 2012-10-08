@@ -28,7 +28,7 @@ import java.security.Principal;
 
 import org.junit.Test;
 import org.picketbox.core.PicketBoxPrincipal;
-import org.picketbox.core.PicketBoxSubject;
+import org.picketbox.core.UserContext;
 import org.picketbox.core.authorization.Resource;
 import org.picketbox.drools.authorization.PicketBoxDroolsAuthorizationManager;
 
@@ -46,7 +46,7 @@ public class PicketBoxDroolsAuthorizationManagerTestCase {
         
         final Principal principal = new PicketBoxPrincipal("anil");
         
-        PicketBoxSubject subject = new PicketBoxSubject() {
+        UserContext subject = new UserContext() {
             @Override
             public Principal getPrincipal() {
                 return principal;
@@ -74,7 +74,7 @@ public class PicketBoxDroolsAuthorizationManagerTestCase {
         
         final Principal badPrincipal = new PicketBoxPrincipal("Bad Man");
         
-        subject = new PicketBoxSubject() {
+        subject = new UserContext() {
             @Override
             public Principal getPrincipal() {
                 return badPrincipal;
