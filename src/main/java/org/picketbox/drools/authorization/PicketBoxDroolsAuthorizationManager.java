@@ -30,7 +30,7 @@ import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
-import org.picketbox.core.PicketBoxSubject;
+import org.picketbox.core.UserContext;
 import org.picketbox.core.authorization.AuthorizationManager;
 import org.picketbox.core.authorization.Resource;
 import org.picketbox.drools.PicketBoxDroolsMessages;
@@ -63,7 +63,7 @@ public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager
     }
 
     @Override
-    public boolean authorize(Resource resource, PicketBoxSubject subject) {
+    public boolean authorize(Resource resource, UserContext subject) {
         if (started == false) {
             throw PicketBoxDroolsMessages.MESSAGES.authorizationManagerNotStarted(getClass().getName());
         }
