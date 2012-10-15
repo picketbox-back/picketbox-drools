@@ -63,7 +63,7 @@ public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager
     }
 
     @Override
-    public boolean authorize(Resource resource, UserContext subject) {
+    public boolean authorize(Resource resource, UserContext userContext) {
         if (started == false) {
             throw PicketBoxDroolsMessages.MESSAGES.authorizationManagerNotStarted(getClass().getName());
         }
@@ -71,8 +71,8 @@ public class PicketBoxDroolsAuthorizationManager implements AuthorizationManager
 
         // Insert the facts
         session.insert(resource);
-        session.insert(subject.getPrincipal());
-        session.insert(subject);
+        session.insert(userContext.getPrincipal());
+        session.insert(userContext);
 
         // Fire the rules. At the end, the resource.isAuthorized() call can tell us if the resource is authorized.
         session.fireAllRules();
