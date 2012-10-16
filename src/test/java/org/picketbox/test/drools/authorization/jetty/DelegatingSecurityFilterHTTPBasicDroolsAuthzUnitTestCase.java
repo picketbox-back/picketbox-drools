@@ -84,8 +84,8 @@ public class DelegatingSecurityFilterHTTPBasicDroolsAuthzUnitTestCase extends Em
 
         FilterHolder filterHolder = new FilterHolder(DelegatingSecurityFilter.class);
         filterHolder.setInitParameter(PicketBoxConstants.AUTHZ_MGR, "Drools");
-        filterHolder.setInitParameter(PicketBoxConstants.AUTH_SCHEME_LOADER,
-                HTTPBasicAuthentication.class.getName());
+        
+        context.setInitParameter(PicketBoxConstants.AUTHENTICATION_KEY, PicketBoxConstants.HTTP_BASIC);
         context.setInitParameter(PicketBoxConstants.HTTP_CONFIGURATION_PROVIDER, HTTPDigestConfigurationProvider.class.getName());
         //context.addFilter(filterHolder, "/", 1);
         
